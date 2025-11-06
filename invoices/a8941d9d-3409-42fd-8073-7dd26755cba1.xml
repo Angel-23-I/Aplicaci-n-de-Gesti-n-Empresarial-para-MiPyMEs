@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<Invoice xmlns="http://www.gdt.gov.vn/einvoice" version="2.0">
+  <GeneralInformation>
+    <InvoiceNumber>INV-20251105-00001</InvoiceNumber>
+    <InvoiceDate>2025-11-05T20:56:19.914488</InvoiceDate>
+    <Currency>VND</Currency>
+    <ExchangeRate>1</ExchangeRate>
+  </GeneralInformation>
+  <Seller>
+    <TaxCode>0123456789</TaxCode>
+    <LegalName>Mi Empresa S.A.</LegalName>
+    <Address>123 Nguyen Hue St, District 1, Ho Chi Minh City</Address>
+    <Phone>+84 28 1234 5678</Phone>
+    <Email>contacto@miempresa.vn</Email>
+  </Seller>
+  <Buyer>
+    <TaxCode>9876543210</TaxCode>
+    <Name>Cliente Ejemplo Ltd.</Name>
+    <Address>456 Le Loi St, District 3, Ho Chi Minh City</Address>
+    <Phone>+84 28 9876 5432</Phone>
+    <Email>cliente@ejemplo.vn</Email>
+  </Buyer>
+  <Items>
+    <Item>
+      <LineNumber>1</LineNumber>
+      <Description>Servicio de Consultoría IT</Description>
+      <Quantity>10</Quantity>
+      <UnitPrice>500000</UnitPrice>
+      <Amount>5000000</Amount>
+      <VATRate>10.0</VATRate>
+    </Item>
+    <Item>
+      <LineNumber>2</LineNumber>
+      <Description>Licencia de Software</Description>
+      <Quantity>1</Quantity>
+      <UnitPrice>2000000</UnitPrice>
+      <Amount>2000000</Amount>
+      <VATRate>10.0</VATRate>
+    </Item>
+  </Items>
+  <Summary>
+    <Subtotal>7000000</Subtotal>
+    <VATAmount>700000.0</VATAmount>
+    <Total>7700000.0</Total>
+  </Summary>
+  <PaymentInformation>
+    <PaymentMethod>Bank Transfer</PaymentMethod>
+  </PaymentInformation>
+</Invoice>

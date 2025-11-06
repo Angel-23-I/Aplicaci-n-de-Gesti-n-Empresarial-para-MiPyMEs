@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión MiPyME - Vietnam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            padding: 40px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .stat-card .number {
+            font-size: 3em;
+            font-weight: bold;
+        }
+        
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .module-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .module-card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .module-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .module-card li {
+            padding: 8px 0;
+            color: #555;
+        }
+        
+        .module-card li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏢 Sistema de Gestión MiPyME</h1>
+            <p>Plataforma Integral para Pequeñas y Medianas Empresas en Vietnam</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Cumplimiento normativo según Decreto 70/2025/ND-CP</p>
+        </header>
+        
+        <div class="dashboard">
+            <h2 style="margin-bottom: 20px; color: #2d3748;">📊 Panel de Control</h2>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Documentos Totales</h3>
+                    <div class="number">{{ stats.total_documents }}</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <h3>Facturas Generadas</h3>
+                    <div class="number">{{ stats.total_invoices }}</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h3>Firmas Pendientes</h3>
+                    <div class="number">{{ stats.pending_signatures }}</div>
+                </div>
+            </div>
+            
+            <h2 style="margin: 40px 0 20px; color: #2d3748;">🎯 Módulos del Sistema</h2>
+            
+            <div class="modules">
+                <div class="module-card">
+                    <h2>📁 Gestión Documental</h2>
+                    <p>Sistema centralizado de gestión de documentos con búsqueda avanzada y control de versiones.</p>
+                    <ul>
+                        <li>Almacenamiento seguro</li>
+                        <li>Búsqueda por metadatos</li>
+                        <li>Categorización automática</li>
+                        <li>Control de versiones</li>
+                        <li>Auditoría completa</li>
+                    </ul>
+                    <a href="/documents" class="btn">Acceder →</a>
+                </div>
+                
+                <div class="module-card">
+                    <h2>🧾 Facturación Electrónica</h2>
+                    <p>Generación de facturas electrónicas conforme al Decreto 70/2025/ND-CP de Vietnam.</p>
+                    <ul>
+                        <li>Formato XML estándar</li>
+                        <li>PDF para clientes</li>
+                        <li>Cálculo automático de IVA</li>
+                        <li>Cumplimiento normativo</li>
+                        <li>Integración con autoridades</li>
+                    </ul>
+                    <a href="/invoices" class="btn">Acceder →</a>
+                </div>
+                
+                <div class="module-card">
+                    <h2>🔐 Firma Digital</h2>
+                    <p>Firma digital legalmente válida según Ley de Transacciones Electrónicas No.20/2023/QH15.</p>
+                    <ul>
+                        <li>Firma RSA 2048 bits</li>
+                        <li>Certificado digital</li>
+                        <li>Verificación de integridad</li>
+                        <li>Timestamp certificado</li>
+                        <li>Cumplimiento legal total</li>
+                    </ul>
+                    <a href="/signature" class="btn">Acceder →</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Sistema de Gestión MiPyME | Desarrollado para Vietnam</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
+                Cumplimiento: Decreto 70/2025/ND-CP | Ley ETL 2023 | Decreto 130/2018/ND-CP
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
