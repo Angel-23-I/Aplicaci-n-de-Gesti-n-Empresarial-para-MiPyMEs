@@ -150,6 +150,11 @@ def download_invoice_xml(invoice_id):
 
 # ============== MÓDULO DE FIRMA DIGITAL ==============
 
+@app.route('/signature', methods=['GET'])
+def signature_page():
+    """Página principal de firma digital"""
+    return render_template('signature.html')
+
 @app.route('/signature/sign', methods=['POST'])
 def sign_document():
     """Firma digitalmente un documento según Ley de Transacciones Electrónicas"""
@@ -171,6 +176,43 @@ def verify_signature():
     
     verification_result = digital_sig.verify_signature(signed_document_path)
     return jsonify(verification_result)
+
+@app.route('/signature/list', methods=['GET'])
+def list_signatures():
+    """Lista todas las firmas digitales"""
+    signatures = list(digital_sig.signatures.values())
+    return jsonify({'signatures': signatures})
+
+@app.route('/signature/document/<doc_id>', methods=['POST'])
+def sign_specific_document(doc_id):
+    """Firma un documento específico del sistema de gestión documental"""
+    document_path = doc_manager.get_document_path(doc_id)
+    
+    if not document_path:
+        return jsonify({'error': 'Document not found'}), 404
+    
+    # Obtener información del documento
+    doc = doc_manager.get_document(doc_id)
+    
+    # Información del firmante (puede venir del request o usar valores por defecto)
+    data = request.json or {}
+    signer_info = {
+        'name': data.get('signer_name', 'Usuario del Sistema'),
+        'email': data.get('signer_email', 'usuario@mipyme.vn'),
+        'tax_code': data.get('signer_tax_code', 'TAX-CODE-001')
+    }
+    
+    signature_result = digital_sig.sign_document(document_path, signer_info)
+    
+    if signature_result.get('success'):
+        signature_result['document_info'] = {
+            'title': doc['title'],
+            'category': doc['category'],
+            'original_filename': doc['original_filename']
+        }
+    
+    return jsonify(signature_result)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

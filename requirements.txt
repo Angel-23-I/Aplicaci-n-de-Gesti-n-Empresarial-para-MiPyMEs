@@ -1,0 +1,7 @@
+flask
+reportlab
+cryptography
+singxml
+lxml
+sqlalchemy
+python-dateutil

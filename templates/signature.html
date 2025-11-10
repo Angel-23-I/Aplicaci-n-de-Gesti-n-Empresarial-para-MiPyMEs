@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firma Digital - MiPyME</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 2em;
+        }
+        
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .info-banner {
+            background: linear-gradient(135deg, #e0f2ff 0%, #f0e6ff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .info-banner h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .info-banner p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .action-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .action-card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .action-card p {
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .btn-action {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-verify {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .signatures-section {
+            margin-top: 50px;
+        }
+        
+        .signatures-section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .signatures-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .signatures-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .signatures-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .signatures-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .signatures-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .signatures-table tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .status-valid {
+            background: #e6ffe6;
+            color: #00cc66;
+        }
+        
+        .status-invalid {
+            background: #ffe6e6;
+            color: #cc0000;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .modal-header h2 {
+            color: #2d3748;
+        }
+        
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            color: #718096;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .result-box.success {
+            background: #e6ffe6;
+            border-left-color: #00cc66;
+        }
+        
+        .result-box.error {
+            background: #ffe6e6;
+            border-left-color: #cc0000;
+        }
+        
+        .result-box h3 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .result-box p {
+            margin: 8px 0;
+            color: #4a5568;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 40px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718096;
+        }
+        
+        .empty-state-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .certificate-info {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .certificate-info h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .certificate-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .certificate-info li {
+            padding: 5px 0;
+            color: #4a5568;
+        }
+        
+        .certificate-info li strong {
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Firma Digital</h1>
+            <a href="/" class="btn-back">← Volver al Panel</a>
+        </header>
+        
+        <div class="content">
+            <div class="info-banner">
+                <h3>✓ Sistema de Firma Digital Legalmente Válido</h3>
+                <p>
+                    Este módulo cumple con la <strong>Ley de Transacciones Electrónicas No.20/2023/QH15</strong> 
+                    y el <strong>Decreto No.130/2018/ND-CP</strong> de Vietnam. Utiliza firma digital RSA de 2048 bits 
+                    con algoritmo SHA-256, garantizando la integridad, autenticidad y no repudio de los documentos firmados.
+                </p>
+            </div>
+            
+            <div class="actions-grid">
+                <div class="action-card">
+                    <h2>✍️ Firmar Documento</h2>
+                    <p>
+                        Firma digitalmente cualquier documento de tu sistema de gestión documental. 
+                        La firma es criptográficamente segura y cumple con los estándares legales vietnamitas.
+                    </p>
+                    <button class="btn-action" onclick="openSignModal()">
+                        🖊️ Firmar Documento
+                    </button>
+                </div>
+                
+                <div class="action-card">
+                    <h2>✓ Verificar Firma</h2>
+                    <p>
+                        Verifica la autenticidad e integridad de un documento firmado. 
+                        El sistema validará la firma digital y confirmará que el documento no ha sido modificado.
+                    </p>
+                    <button class="btn-action btn-verify" onclick="openVerifyModal()">
+                        🔍 Verificar Firma
+                    </button>
+                </div>
+            </div>
+            
+            <div class="certificate-info">
+                <h4>📜 Información del Certificado Digital</h4>
+                <ul>
+                    <li><strong>Algoritmo:</strong> RSA-PSS con SHA-256</li>
+                    <li><strong>Tamaño de Clave:</strong> 2048 bits</li>
+                    <li><strong>Tipo de Firma:</strong> Tipo 2 - Firma Digital Pública (según ETL 2023)</li>
+                    <li><strong>Cumplimiento Legal:</strong> Decreto 130/2018/ND-CP de Vietnam</li>
+                    <li><strong>Validez:</strong> Certificado autofirmado para demostración</li>
+                </ul>
+            </div>
+            
+            <div class="signatures-section">
+                <h2>📋 Registro de Firmas Digitales</h2>
+                <div id="signaturesContainer">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Firmar Documento -->
+    <div id="signModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✍️ Firmar Documento</h2>
+                <button class="btn-close" onclick="closeSignModal()">×</button>
+            </div>
+            
+            <form id="signForm">
+                <div class="form-group">
+                    <label>Seleccionar Documento:</label>
+                    <select name="document_id" id="documentSelect" required>
+                        <option value="">Cargando documentos...</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nombre del Firmante:</label>
+                    <input type="text" name="signer_name" required placeholder="Nombre completo">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email del Firmante:</label>
+                    <input type="email" name="signer_email" required placeholder="email@ejemplo.vn">
+                </div>
+                
+                <div class="form-group">
+                    <label>Tax Code / NIT:</label>
+                    <input type="text" name="signer_tax_code" required placeholder="Tax Code">
+                </div>
+                
+                <button type="submit" class="btn-submit">🖊️ Firmar Documento</button>
+            </form>
+            
+            <div id="signResult"></div>
+        </div>
+    </div>
+    
+    <!-- Modal Verificar Firma -->
+    <div id="verifyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔍 Verificar Firma Digital</h2>
+                <button class="btn-close" onclick="closeVerifyModal()">×</button>
+            </div>
+            
+            <form id="verifyForm">
+                <div class="form-group">
+                    <label>Seleccionar Documento Firmado:</label>
+                    <select name="document_id" id="verifyDocumentSelect" required>
+                        <option value="">Cargando documentos firmados...</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-submit btn-verify">✓ Verificar Firma</button>
+            </form>
+            
+            <div id="verifyResult"></div>
+        </div>
+    </div>
+    
+    <script>
+        let allDocuments = [];
+        let allSignatures = [];
+        
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSignatures();
+            loadDocuments();
+            setupFormSubmits();
+        });
+        
+        // Cargar documentos disponibles
+        async function loadDocuments() {
+            try {
+                const response = await fetch('/documents/list');
+                const data = await response.json();
+                allDocuments = data.documents || [];
+                populateDocumentSelects();
+            } catch (error) {
+                console.error('Error al cargar documentos:', error);
+            }
+        }
+        
+        // Poblar los selects de documentos
+        function populateDocumentSelects() {
+            const signSelect = document.getElementById('documentSelect');
+            const verifySelect = document.getElementById('verifyDocumentSelect');
+            
+            if (allDocuments.length === 0) {
+                signSelect.innerHTML = '<option value="">No hay documentos disponibles</option>';
+                verifySelect.innerHTML = '<option value="">No hay documentos disponibles</option>';
+                return;
+            }
+            
+            signSelect.innerHTML = '<option value="">Seleccionar documento...</option>' +
+                allDocuments.map(doc => 
+                    `<option value="${doc.id}">${doc.title} (${doc.original_filename})</option>`
+                ).join('');
+            
+            verifySelect.innerHTML = '<option value="">Seleccionar documento...</option>' +
+                allDocuments.map(doc => 
+                    `<option value="${doc.id}">${doc.title} (${doc.original_filename})</option>`
+                ).join('');
+        }
+        
+        // Cargar firmas digitales
+        async function loadSignatures() {
+            try {
+                const response = await fetch('/signature/list');
+                const data = await response.json();
+                allSignatures = data.signatures || [];
+                displaySignatures(allSignatures);
+            } catch (error) {
+                console.error('Error al cargar firmas:', error);
+                document.getElementById('signaturesContainer').innerHTML = 
+                    '<div class="empty-state"><div class="empty-state-icon">⚠️</div><h3>Error al cargar firmas</h3></div>';
+            }
+        }
+        
+        // Mostrar firmas
+        function displaySignatures(signatures) {
+            const container = document.getElementById('signaturesContainer');
+            
+            if (signatures.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔐</div>
+                        <h3>No hay firmas registradas</h3>
+                        <p>Comienza firmando tu primer documento</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const html = `
+                <div class="signatures-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID de Firma</th>
+                                <th>Firmante</th>
+                                <th>Documento</th>
+                                <th>Fecha</th>
+                                <th>Algoritmo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${signatures.map(sig => `
+                                <tr>
+                                    <td><strong>${sig.signature_id}</strong></td>
+                                    <td>${sig.signer_name}<br><small>${sig.signer_email}</small></td>
+                                    <td><small>${sig.document_path.split(/[/\\]/).pop()}</small></td>
+                                    <td>${formatDate(sig.timestamp)}</td>
+                                    <td><small>${sig.algorithm}</small></td>
+                                    <td>
+                                        <span class="status-badge status-${sig.status}">
+                                            ${sig.status === 'valid' ? '✓ Válida' : '✗ Inválida'}
+                                        </span>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        // Configurar envío de formularios
+        function setupFormSubmits() {
+            // Formulario de firma
+            document.getElementById('signForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const doc_id = formData.get('document_id');
+                
+                const signData = {
+                    signer_name: formData.get('signer_name'),
+                    signer_email: formData.get('signer_email'),
+                    signer_tax_code: formData.get('signer_tax_code')
+                };
+                
+                try {
+                    const response = await fetch(`/signature/document/${doc_id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(signData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        const resultHtml = `
+                            <div class="result-box success">
+                                <h3>✓ Documento Firmado Exitosamente</h3>
+                                <p><strong>ID de Firma:</strong> ${result.signature_id}</p>
+                                <p><strong>Firmante:</strong> ${result.signer}</p>
+                                <p><strong>Timestamp:</strong> ${formatDate(result.timestamp)}</p>
+                                <p><strong>Documento:</strong> ${result.document_info.title}</p>
+                                <p style="margin-top: 15px; font-size: 0.9em; color: #00cc66;">
+                                    ${result.message}
+                                </p>
+                            </div>
+                        `;
+                        document.getElementById('signResult').innerHTML = resultHtml;
+                        
+                        setTimeout(() => {
+                            closeSignModal();
+                            loadSignatures();
+                        }, 3000);
+                    } else {
+                        const resultHtml = `
+                            <div class="result-box error">
+                                <h3>✗ Error al Firmar</h3>
+                                <p>${result.error}</p>
+                            </div>
+                        `;
+                        document.getElementById('signResult').innerHTML = resultHtml;
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('signResult').innerHTML = `
+                        <div class="result-box error">
+                            <h3>✗ Error</h3>
+                            <p>Error al procesar la firma digital</p>
+                        </div>
+                    `;
+                }
+            });
+            
+            // Formulario de verificación
+            document.getElementById('verifyForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const doc_id = formData.get('document_id');
+                
+                // Obtener la ruta del documento
+                const doc = allDocuments.find(d => d.id === doc_id);
+                if (!doc) {
+                    alert('Documento no encontrado');
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('/signature/verify', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            document_path: `uploads/${doc.stored_filename}`
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.valid) {
+                        const resultHtml = `
+                            <div class="result-box success">
+                                <h3>✓ Firma Válida</h3>
+                                <p><strong>ID de Firma:</strong> ${result.signature_id}</p>
+                                <p><strong>Firmante:</strong> ${result.signer}</p>
+                                <p><strong>Timestamp:</strong> ${formatDate(result.timestamp)}</p>
+                                <p><strong>Algoritmo:</strong> ${result.algorithm}</p>
+                                <p><strong>Integridad:</strong> ${result.integrity}</p>
+                                <p style="margin-top: 15px; font-size: 0.9em; color: #00cc66;">
+                                    ${result.message}
+                                </p>
+                            </div>
+                        `;
+                        document.getElementById('verifyResult').innerHTML = resultHtml;
+                    } else {
+                        const resultHtml = `
+                            <div class="result-box error">
+                                <h3>✗ Firma Inválida</h3>
+                                <p><strong>Error:</strong> ${result.error}</p>
+                                <p><strong>Integridad:</strong> ${result.integrity || 'desconocida'}</p>
+                                <p style="margin-top: 15px; font-size: 0.9em; color: #cc0000;">
+                                    ⚠️ El documento puede haber sido modificado o la firma no es válida.
+                                </p>
+                            </div>
+                        `;
+                        document.getElementById('verifyResult').innerHTML = resultHtml;
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('verifyResult').innerHTML = `
+                        <div class="result-box error">
+                            <h3>✗ Error</h3>
+                            <p>Error al verificar la firma digital</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+        
+        // Funciones de modal
+        function openSignModal() {
+            document.getElementById('signModal').classList.add('active');
+            document.getElementById('signResult').innerHTML = '';
+        }
+        
+        function closeSignModal() {
+            document.getElementById('signModal').classList.remove('active');
+            document.getElementById('signForm').reset();
+            document.getElementById('signResult').innerHTML = '';
+        }
+        
+        function openVerifyModal() {
+            document.getElementById('verifyModal').classList.add('active');
+            document.getElementById('verifyResult').innerHTML = '';
+        }
+        
+        function closeVerifyModal() {
+            document.getElementById('verifyModal').classList.remove('active');
+            document.getElementById('verifyForm').reset();
+            document.getElementById('verifyResult').innerHTML = '';
+        }
+        
+        // Utilidades
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+    </script>
+</body>
+</html>
