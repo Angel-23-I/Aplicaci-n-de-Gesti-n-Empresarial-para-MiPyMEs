@@ -1,0 +1,39 @@
+{
+  "f45762d4-c307-4a25-aac6-5d73d96f3b9c": {
+    "id": "f45762d4-c307-4a25-aac6-5d73d96f3b9c",
+    "invoice_number": "INV-20251112-00001",
+    "invoice_date": "2025-11-12T18:39:19.647834",
+    "seller_info": {
+      "name": "zz",
+      "tax_code": "45",
+      "address": "xcvxc345cc",
+      "phone": "56312315",
+      "email": "asdbs@gana.com"
+    },
+    "buyer_info": {
+      "name": "bj",
+      "tax_code": "454",
+      "address": "gs34dfgh",
+      "phone": "46123486",
+      "email": "asjda@gajs.com"
+    },
+    "items": [
+      {
+        "description": "asjfa",
+        "quantity": 8.01,
+        "unit_price": 3434
+      }
+    ],
+    "subtotal": 27506.34,
+    "vat_rate": 0.1,
+    "vat_amount": 2750.634,
+    "total": 30256.974000000002,
+    "currency": "EUR",
+    "payment_method": "Credit Card",
+    "notes": "xdfzdf",
+    "xml_path": "invoices\\f45762d4-c307-4a25-aac6-5d73d96f3b9c.xml",
+    "pdf_path": "invoices\\f45762d4-c307-4a25-aac6-5d73d96f3b9c.pdf",
+    "status": "generated",
+    "created_at": "2025-11-12T18:39:19.647834"
+  }
+}

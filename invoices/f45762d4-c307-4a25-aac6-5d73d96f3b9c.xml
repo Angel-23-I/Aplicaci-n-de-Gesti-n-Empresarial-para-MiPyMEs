@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<Invoice xmlns="http://www.gdt.gov.vn/einvoice" version="2.0">
+  <GeneralInformation>
+    <InvoiceNumber>INV-20251112-00001</InvoiceNumber>
+    <InvoiceDate>2025-11-12T18:39:19.647834</InvoiceDate>
+    <Currency>EUR</Currency>
+    <ExchangeRate>1</ExchangeRate>
+  </GeneralInformation>
+  <Seller>
+    <TaxCode>45</TaxCode>
+    <LegalName>zz</LegalName>
+    <Address>xcvxc345cc</Address>
+    <Phone>56312315</Phone>
+    <Email>asdbs@gana.com</Email>
+  </Seller>
+  <Buyer>
+    <TaxCode>454</TaxCode>
+    <Name>bj</Name>
+    <Address>gs34dfgh</Address>
+    <Phone>46123486</Phone>
+    <Email>asjda@gajs.com</Email>
+  </Buyer>
+  <Items>
+    <Item>
+      <LineNumber>1</LineNumber>
+      <Description>asjfa</Description>
+      <Quantity>8.01</Quantity>
+      <UnitPrice>3434</UnitPrice>
+      <Amount>27506.34</Amount>
+      <VATRate>10.0</VATRate>
+    </Item>
+  </Items>
+  <Summary>
+    <Subtotal>27506.34</Subtotal>
+    <VATAmount>2750.634</VATAmount>
+    <Total>30256.974000000002</Total>
+  </Summary>
+  <PaymentInformation>
+    <PaymentMethod>Credit Card</PaymentMethod>
+  </PaymentInformation>
+</Invoice>

@@ -1,0 +1,41 @@
+{
+  "SIG-20251112183708": {
+    "signature_id": "SIG-20251112183708",
+    "document_path": "uploads\\51c7bb27-6b9e-4bfc-8479-19c8321c5f64.docx",
+    "signer_name": "julio alberto",
+    "signer_email": "asdsa@ahsd.com",
+    "signer_tax_code": "744",
+    "signature": "b8iVVHJSWCrhHTrJGRND6MdaRa9fBO5jOkL5XVu04Hd7AeftWemqP9NUQApaQS6P0IxqtXtLHmnB/nfDP6er4i9lWJJnHfLx/9njwQgaWE0G1Y3Fqcw4L0taxi2I3xRnkoIHzyZGOMLD7FKjjr7rp+OC+zFgT7yA7sol+se7P4Thvlz0BZdpdWB48ipyiZp3fv4IEsvfGEaiZMC79R2SLI0aTir+Cc8Xpj0wQaILn5zRTS/jm2P+dr67qsJmufXCXQaoKH6vmuqtZ00RZgA/t4nNva2Jcir5Y5JiLH/QyZ6JyfsDircIR8AitxjX2xW7okzkRX3Nvh6tCb7UV2zI6A==",
+    "document_hash": "N4FLM/3j5Jgs+j9r9Fjy6ipteqEuHQRsJD+r4Kpmme8=",
+    "timestamp": "2025-11-12T18:37:08.737720",
+    "algorithm": "RSA-PSS-SHA256",
+    "key_size": 2048,
+    "status": "valid"
+  },
+  "SIG-20251112183919": {
+    "signature_id": "SIG-20251112183919",
+    "document_path": "invoices\\f45762d4-c307-4a25-aac6-5d73d96f3b9c.xml",
+    "signer_name": "Sistema de Facturación MiPyME",
+    "signer_email": "facturacion@mipyme.vn",
+    "signer_tax_code": "DEMO-TAX-CODE",
+    "signature": "kJ9tpfS24aeWuk2Nh/Os6patkeYzzeUrKyeb54N3PL08oBePMaYG43fQGo7XQbfjlddvArG/IiCkR6SlFvp4+SKRkLQ00+BIJef52HIdz8+KfMHZiwPaMa6hbPXgjHAvmLX4nasHuGZCErRPb2wv7WTgyZHYi5ceZI97IlbZEdc/dX+JPfwZO46mLTsMa4SCRtmQKEPgJ9jB5bS9CRjMp9BOEZRQn+QJ1sTLGV0hbQHga5ksyyOv/H4XvUji6u/QfqphfXaYNSAFTUyzT2kf6bhgf13E+QqWBeBTv9G/JbmGTyr2t3CElVGbWmaawesWDR76NnLcF+PZZTSibREreQ==",
+    "document_hash": "9lG6Gt8BVJQBkUBkUfz7i9xRnVEOgqTzFuLJuveuisg=",
+    "timestamp": "2025-11-12T18:39:19.742943",
+    "algorithm": "RSA-PSS-SHA256",
+    "key_size": 2048,
+    "status": "valid"
+  },
+  "SIG-20251113112605": {
+    "signature_id": "SIG-20251113112605",
+    "document_path": "uploads\\51c7bb27-6b9e-4bfc-8479-19c8321c5f64.docx",
+    "signer_name": "julio alberto",
+    "signer_email": "cxvbcxvbv@gmail.com",
+    "signer_tax_code": "53452543",
+    "signature": "UIbAdW0XGgDLH//YhRXQlRGD6ArGKj4iGNY/iOsJdIBddeVF/GFDPhpqc1R/z+CoBi6HabGb6gRtEHLEfIwYWmZiEIM7yYql/2m4NSb17e5k2tP9ycW0cCDkr0umiTcvNCe0VzXTTQ0Ws26bHzOzlrc8iHOqtClGciVtWpiXkkRUyvl3fgzq16mh4+LE0GnFtMAkqITjhcE+9snjmt9VCcveDJYOdMJCalgLqhvrVTRONqRH4DxLQICuj3AH5sO+FD7APegjtIE6BrthoTJQAIsGP11sF5wKtQNvktyKj+ZRSLg/BacfC+Y70Sgr29M3wINW7yPWB1lEfoSCM09zgw==",
+    "document_hash": "N4FLM/3j5Jgs+j9r9Fjy6ipteqEuHQRsJD+r4Kpmme8=",
+    "timestamp": "2025-11-13T11:26:05.119940",
+    "algorithm": "RSA-PSS-SHA256",
+    "key_size": 2048,
+    "status": "valid"
+  }
+}
