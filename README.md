@@ -8,8 +8,8 @@ Instalación
 
 
 ```
-git clone https://github.com/tu-usuario/sistema-gestion-mipyme.git
-cd sistema-gestion-mipyme
+git clone https://github.com/Angel-23-I/Aplicaci-n-de-Gesti-n-Empresarial-para-MiPyMEs.git
+cd Aplicaci-n-de-Gesti-n-Empresarial-para-MiPyMEs
 ```
 
 ### Paso 2: Crear Entorno Virtual (Recomendado)
